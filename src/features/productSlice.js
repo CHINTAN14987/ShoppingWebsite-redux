@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = { products: [] };
+const initialState = { products: [], selectedProducts: [] };
 const productSlice = createSlice({
   name: "product",
   initialState,
@@ -7,7 +7,12 @@ const productSlice = createSlice({
     setproducts: (state, action) => {
       state.products = action.payload;
     },
-    selectedProducts: (state, action) => {},
+    selectedProducts: (state, action) => {
+      state.selectedProducts = action.payload;
+    },
+    removeSelectedProducts: (state) => {
+      state.selectedProducts = [];
+    },
   },
 });
 export const ProductActions = productSlice.actions;

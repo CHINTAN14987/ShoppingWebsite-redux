@@ -1,14 +1,13 @@
 import React from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
+
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
+
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import "../css/ProductList.css";
 import { Link } from "react-router-dom";
-import { style } from "@mui/system";
 
 const ProductComponent = () => {
   const productsCartValue = useSelector((state) => state.myProduct.products);
@@ -17,26 +16,60 @@ const ProductComponent = () => {
     <div className="product_list_wrapper">
       {productsCartValue.map((item) => {
         return (
-          <Link to={`/products/:${item.id}`} style={{ textDecoration: "none" }}>
-            <div key={item.id}>
-              <Card sx={{ Width: 400, height: 450 }}>
+          <Link
+            className="items"
+            to={`/products/${item.id}`}
+            style={{
+              textDecoration: "none",
+            }}
+            key={item.id}
+          >
+            <div>
+              <Card
+                sx={{
+                  Width: 400,
+                  minHeight: 400,
+                }}
+              >
                 <CardMedia
                   component="img"
                   height="200"
                   image={item.image}
-                  alt="green iguana"
-                  style={{ objectFit: "contain" }}
+                  alt=""
+                  style={{ objectFit: "contain", marginTop: "1rem" }}
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    style={{
+                      fontWeight: "700",
+                      color: "black",
+                      marginBottom: "10px",
+                    }}
+                  >
                     {item.title}
                   </Typography>
+
                   <Typography
-                    variant="body2"
+                    variant="h3"
                     color="text.secondary"
-                    style={{ fontWeight: "600", fontSize: "15px" }}
+                    style={{ fontWeight: "600", fontSize: "20px" }}
                   >
-                    {item.description}
+                    {item.category}
+                  </Typography>
+
+                  <Typography
+                    variant="h3"
+                    color="black"
+                    style={{
+                      fontWeight: "700",
+                      fontSize: "18px",
+                      marginTop: "10px",
+                    }}
+                  >
+                    {item.price}
                   </Typography>
                 </CardContent>
               </Card>
@@ -44,7 +77,6 @@ const ProductComponent = () => {
           </Link>
         );
       })}
-      {console.log(productsCartValue)}
     </div>
   );
 };
