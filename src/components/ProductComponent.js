@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "@mui/material/Card";
 
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 
 import Typography from "@mui/material/Typography";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../css/ProductList.css";
 import { Link } from "react-router-dom";
+import { fetchProducts } from "../features/productSlice";
 
 const ProductComponent = () => {
+  let dispatch = useDispatch();
   const productsCartValue = useSelector((state) => state.myProduct.products);
-
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
   return (
     <div className="product_list_wrapper">
+      {console.log(productsCartValue)}
       {productsCartValue.map((item) => {
         return (
           <Link
